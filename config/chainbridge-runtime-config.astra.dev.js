@@ -50,7 +50,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: 18,
         bridgeAddress: "0x24482346ed6Ec116cFeFB07558654790f6a90598",
         erc20HandlerAddress: "0x374035D0e05ceeF4CaB5CEb4E9bAF0787924EB00",
-        rpcUrl: "http://localhost:8545",
+        rpcUrl: "https://evm.astranaut.network/",
         type: "Ethereum",
         nativeTokenSymbol: "ASTRA",
         availableAsHomeNetwork: true,
