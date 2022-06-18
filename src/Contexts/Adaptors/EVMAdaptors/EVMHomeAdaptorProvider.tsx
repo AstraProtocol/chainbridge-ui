@@ -42,6 +42,8 @@ export const EVMHomeAdaptorProvider = ({
     switch (Number(id)) {
       case 1:
         return "Ethereum Mainnet";
+      case 2:
+        return "Cere Mainnet (Testnet)";
       case 3:
         return "Ethereum Ropsten";
       case 4:
