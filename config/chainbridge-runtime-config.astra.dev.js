@@ -4,6 +4,10 @@ const astraTokenDecimals = 18;
 
 window.__RUNTIME_CONFIG__ = {
   CHAINBRIDGE: {
+    ga: {
+      trackingId: "G-EVYKNM010Y",
+      appName: "chainbridge-ui",
+    },
     chains: [
       {
         chainId: 0,
@@ -25,6 +29,15 @@ window.__RUNTIME_CONFIG__ = {
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
           },
         ],
+        transferFallback: [
+          {
+            chainId: 1,
+            delayMs: 4 * 60 * 1000,
+            blockTimeMs: 6000,
+            pollingMinIntervalMs: 15000,
+            pollingMaxIntervalMs: 30000,
+          },
+        ],
       },
       {
         chainId: 1,
@@ -44,6 +57,15 @@ window.__RUNTIME_CONFIG__ = {
             imageUri: "WETHIcon",
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+          },
+        ],
+        transferFallback: [
+          {
+            chainId: 0,
+            delayMs: 4 * 60 * 1000,
+            blockTimeMs: 6000,
+            pollingMinIntervalMs: 15000,
+            pollingMaxIntervalMs: 30000,
           },
         ],
       },
