@@ -16,7 +16,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: 18,
         bridgeAddress: "0x55099CCB1226387056C013dd2BB6fb4Cb20CB769",
         erc20HandlerAddress: "0x1B7ea47C7c9f061065D37152D3F85B30831eec99",
-        rpcUrl: "https://rpc-mumbai.matic.today",
+        rpcUrl: "https://matic-mumbai.chainstacklabs.com",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
         defaultGasPrice: 800,
