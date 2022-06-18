@@ -342,7 +342,6 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
 };
 
 const useNetworkManager = () => {
-    console.log("useNetworkManager")
   const context = useContext(NetworkManagerContext);
   if (context === undefined) {
     throw new Error(

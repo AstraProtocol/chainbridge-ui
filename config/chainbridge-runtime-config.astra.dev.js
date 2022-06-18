@@ -19,6 +19,10 @@ window.__RUNTIME_CONFIG__ = {
         rpcUrl: "https://rpc-mumbai.matic.today",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
+        defaultGasPrice: 800,
+        gasPriceSuggestionEnabled: true,
+        defaultGasPriceIncreaseInPercents: 10,
+        availableAsHomeNetwork: true,
         tokens: [
           {
             address: "0x8aeE18D1fbC7d4D7BFcbF617E9bfa4b2079d5232",
@@ -49,6 +53,8 @@ window.__RUNTIME_CONFIG__ = {
         rpcUrl: "http://localhost:8545",
         type: "Ethereum",
         nativeTokenSymbol: "ASTRA",
+        availableAsHomeNetwork: true,
+        defaultGasPrice: 1000,
         tokens: [
           {
             address: "0x1E080e14CA5768B579F09Ea221AD731d9045641f",
@@ -63,7 +69,7 @@ window.__RUNTIME_CONFIG__ = {
           {
             chainId: 0,
             delayMs: 4 * 60 * 1000,
-            blockTimeMs: 6000,
+            blockTimeMs: 4000,
             pollingMinIntervalMs: 15000,
             pollingMaxIntervalMs: 30000,
           },
