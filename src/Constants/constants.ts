@@ -6,8 +6,8 @@ const styles = {
 };
 
 const blockchainChainIds = {
-  ETHEREUM: 0,
-  POLYGON: 2,
+  ETHEREUM: 2,
+  POLYGON: 0,
   ASTRA: 1,
 };
 
