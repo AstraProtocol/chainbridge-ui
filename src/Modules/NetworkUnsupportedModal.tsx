@@ -65,7 +65,7 @@ const NetworkUnsupportedModal = () => {
 
   const [open, setOpen] = useState(false);
   const [supportedNetworks, setSupportedNetworks] = useState<number[]>([]);
-  const ethereumNetworkIds = [1, 5, 137, 80001];
+  const ethereumNetworkIds = [1, 5, 137, 80001, 11112];
   const [supportedEthereumNetworks, setSupportedEthereumNetworks] = useState<
     string
   >("");
