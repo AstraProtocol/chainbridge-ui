@@ -168,6 +168,8 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         (c) => c.chainId === chainId && c.availableAsHomeNetwork
       );
 
+      console.log("chain", chain)
+
       const fetchDestinationChainIds = (homeChainId: number) => {
         switch (homeChainId) {
           case blockchainChainIds.POLYGON:
