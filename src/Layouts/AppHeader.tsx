@@ -103,7 +103,7 @@ const AppHeader: React.FC<IAppHeader> = () => {
           to="/"
         >
           <Typography variant="h4" className={classes.title}>
-            Cere Bridge
+            Astra Bridge
           </Typography>
         </NavLink>
       </div>

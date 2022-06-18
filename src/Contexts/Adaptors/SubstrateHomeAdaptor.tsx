@@ -176,7 +176,7 @@ export const SubstrateHomeAdaptorProvider = ({
   const handleConnect = useCallback(async () => {
     // Requests permission to inject the wallet
     if (!isReady) {
-      web3Enable("Cere Bridge")
+      web3Enable("Astra Bridge")
         .then(() => {
           // web3Account resolves with the injected accounts
           // or an empty array

@@ -572,7 +572,7 @@ const TransferPage = () => {
             ) : (
               <>
                 <div className={classes.walletDesc}>
-                  Cere Bridge is under maintenance.
+                  Astra Bridge is under maintenance.
                   <br />
                   Please, try again later.
                 </div>
