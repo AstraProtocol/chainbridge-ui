@@ -545,9 +545,9 @@ const TransferPage = () => {
             {process.env.REACT_APP_MAINTENANCE === "false" ? (
               <>
                 <div className={classes.walletDesc}>
-                  Move CERE tokens between
+                  Move USDT tokens between
                   <br />
-                  Ethereum/Polygon and Cere Native Blockchain
+                  Ethereum/Polygon and Astra Blockchain
                 </div>
                 <Button
                   variant="primary"
@@ -792,7 +792,7 @@ const TransferPage = () => {
                 }}
                 target="_blank"
               >
-                Cere Staking
+                Astra Staking
               </NavLink>
             </section>
           </>

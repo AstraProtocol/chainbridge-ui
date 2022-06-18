@@ -1,3 +1,6 @@
+const astraTokenName = "Astra Network";
+const astraTokenSymbol = "USDT";
+const astraTokenDecimals = 18;
 
 window.__RUNTIME_CONFIG__ = {
   CHAINBRIDGE: {
