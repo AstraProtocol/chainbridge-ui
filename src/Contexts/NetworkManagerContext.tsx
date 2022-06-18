@@ -182,6 +182,7 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
 
       if (chain) {
         const destinationChainIds = fetchDestinationChainIds(chain.chainId);
+        console.log(chainId, destinationChainIds)
         setHomeChainConfig(chain);
         setDestinationChains(
           chainbridgeConfig.chains.filter((bridgeConfig: BridgeConfig) =>
@@ -341,6 +342,7 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
 };
 
 const useNetworkManager = () => {
+    console.log("useNetworkManager")
   const context = useContext(NetworkManagerContext);
   if (context === undefined) {
     throw new Error(
