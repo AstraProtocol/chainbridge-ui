@@ -1,5 +1,5 @@
 {
-  "name": "@Cerebellum-Network/chainbridge-ui",
+  "name": "@AstraProtocol/chainbridge-ui",
   "version": "0.14.0",
   "private": true,
   "dependencies": {

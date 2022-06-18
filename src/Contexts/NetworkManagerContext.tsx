@@ -172,8 +172,8 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         switch (homeChainId) {
           case blockchainChainIds.POLYGON:
           case blockchainChainIds.ETHEREUM:
-            return [blockchainChainIds.CERE];
-          case blockchainChainIds.CERE:
+            return [blockchainChainIds.ASTRA];
+          case blockchainChainIds.ASTRA:
             return [blockchainChainIds.POLYGON];
           default:
             return [];

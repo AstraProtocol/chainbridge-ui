@@ -8,7 +8,7 @@ const styles = {
 const blockchainChainIds = {
   ETHEREUM: 0,
   POLYGON: 2,
-  CERE: 1,
+  ASTRA: 1,
 };
 
 export { styles, blockchainChainIds };
