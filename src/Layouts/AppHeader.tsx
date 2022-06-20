@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { NavLink, Typography } from "@chainsafe/common-components";
 import { shortenAddress } from "../Utils/Helpers";
 import { useChainbridge } from "../Contexts/ChainbridgeContext";
-import CereLogo from "../media/Icons/cere-icon.svg";
+import CereLogo from "../media/Icons/astra-icon.svg";
 import { styles } from "../Constants/constants";
 
 const useStyles = makeStyles(
