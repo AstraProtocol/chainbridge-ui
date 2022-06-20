@@ -32,6 +32,15 @@ window.__RUNTIME_CONFIG__ = {
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
           },
+          {
+            address: "0x3813e82e6f7098b9583fc0f33a962d02018b6803",
+            name: "USDT test",
+            symbol: "USDT",
+            imageUri: "USDTIcon",
+            decimals: 6,
+            resourceId:
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce01",
+          }
         ],
         transferFallback: [
           {
@@ -64,6 +73,15 @@ window.__RUNTIME_CONFIG__ = {
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
           },
+          {
+            address: "0xf8B0c22089C5EE643A5bA475656Ca32Daf48eEcb",
+            name: "USDT test",
+            symbol: "USDT",
+            imageUri: "USDTIcon",
+            decimals: 6,
+            resourceId:
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce01",
+          }
         ],
         transferFallback: [
           {
