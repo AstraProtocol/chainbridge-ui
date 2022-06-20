@@ -773,7 +773,7 @@ const TransferPage = () => {
                 to={{ pathname: "https://cere.network/" }}
                 target="_blank"
               >
-                Cere Homepage
+                Astra Homepage
               </NavLink>
               <NavLink
                 style={{ textDecoration: "none" }}

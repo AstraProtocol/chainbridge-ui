@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { NavLink, Typography } from "@chainsafe/common-components";
 import { shortenAddress } from "../Utils/Helpers";
 import { useChainbridge } from "../Contexts/ChainbridgeContext";
-import CereLogo from "../media/Icons/astra-icon.svg";
+import AstraLogo from "../media/Icons/astra-icon.svg";
 import { styles } from "../Constants/constants";
 
 const useStyles = makeStyles(
@@ -94,7 +94,7 @@ const AppHeader: React.FC<IAppHeader> = () => {
         {/* ADD LOGO HERE */}
         <div className={classes.logo}>
           <NavLink style={{ textDecoration: "none" }} to="/">
-            <img src={CereLogo} alt="Cere Logo" />
+            <img src={AstraLogo} alt="Astra Logo" />
           </NavLink>
         </div>
         <NavLink
