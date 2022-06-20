@@ -27,3 +27,4 @@ yarn-error.log*
 
 # runtime config
 public/chainbridge-runtime-config.js
+.idea
