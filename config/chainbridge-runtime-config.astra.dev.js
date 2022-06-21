@@ -74,7 +74,7 @@ window.__RUNTIME_CONFIG__ = {
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
           },
           {
-            address: "0x864A2F57E0cAFD07E612a1aB02f429707EfE3dBC",
+            address: "0x9e54b72233D1165cF9E317892f8412F3C3a56B26",
             name: "Astra USDT",
             symbol: "aUSDT",
             imageUri: "USDTIcon",
