@@ -78,7 +78,7 @@ window.__RUNTIME_CONFIG__ = {
             name: "Astra USDT",
             symbol: "aUSDT",
             imageUri: "USDTIcon",
-            decimals: 6,
+            decimals: 18,
             resourceId:
                 "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce01",
           }
