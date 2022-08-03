@@ -1,6 +1,7 @@
 import ETHIcon from "./media/tokens/eth.svg";
 // import WETHIcon from "./media/tokens/weth.svg";
 import CEREIcon from "./media/tokens/cere-token.svg";
+import { BigNumber, Contract } from "ethers";
 
 export type TokenConfig = {
   address: string;
@@ -25,6 +26,7 @@ export type TransferFallback = {
 
 export type BridgeConfig = {
   networkId?: number;
+  lzNetworkId?: number;
   chainId: number;
   name: string;
   rpcUrl: string;
@@ -89,4 +91,34 @@ export const getСhainTransferFallbackConfig = (
   return chainConfig.transferFallback.find(
     (fallback) => fallback.chainId === destinationChainId
   ) as TransferFallback;
+};
+export type SendTransactionInfo = {
+  gasPrice?: string | BigNumber | undefined | number;
+  gasLimit?: string | BigNumber | undefined | number;
+  value?: string | BigNumber | undefined | number;
+};
+
+export type TxHash = {
+  hash: string;
+  wait: () => Promise<void>;
+};
+
+export type AstraBridge = Contract & {
+  estimateSendFee: (
+    _dstChainId: number,
+    _data: string,
+    _useZro: boolean,
+    _adapterParams: string
+  ) => Promise<{
+    nativeFee: BigNumber;
+    zroFee: BigNumber;
+  }>;
+  sendToChain: (
+    _from: string,
+    _dstChainId: number,
+    _resourceID: string,
+    _data: string, // {resourceID,amount,toAddress}
+    _adapterParams: string,
+    transactionInfo: SendTransactionInfo
+  ) => Promise<TxHash>;
 };

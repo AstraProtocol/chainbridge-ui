@@ -1,9 +1,10 @@
 import React from "react";
 import { Bridge, BridgeFactory } from "@chainsafe/chainbridge-contracts";
 import { useWeb3 } from "@chainsafe/web3-context";
-import { BigNumber, utils } from "ethers";
+import { BigNumber, utils, Contract } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import {
+  AstraBridge,
   chainbridgeConfig,
   EvmBridgeConfig,
   SubstrateBridgeConfig,
@@ -20,6 +21,8 @@ import { decodeAddress } from "@polkadot/util-crypto";
 import { getPriceCompatibility } from "./helpers";
 import { createApi, hasTokenSupplies } from "../SubstrateApis/ChainBridgeAPI";
 import { ApiPromise } from "@polkadot/api";
+
+import bridgeAbi from "../../../Contracts/abi/Bridge.json";
 
 export const EVMHomeAdaptorProvider = ({
   children,
@@ -90,9 +93,12 @@ export const EVMHomeAdaptorProvider = ({
     fallback,
     analytics,
     setAddress,
+    setTransferTxHash,
   } = useNetworkManager();
 
-  const [homeBridge, setHomeBridge] = useState<Bridge | undefined>(undefined);
+  const [homeBridge, setHomeBridge] = useState<AstraBridge | undefined>(
+    undefined
+  );
   const [relayerThreshold, setRelayerThreshold] = useState<number | undefined>(
     undefined
   );
@@ -163,16 +169,17 @@ export const EVMHomeAdaptorProvider = ({
                       setInitialising(false);
                       return;
                     }
-
-                    const bridge = BridgeFactory.connect(
+                    const bridgeContract = new Contract(
                       (homeChainConfig as EvmBridgeConfig).bridgeAddress,
+                      bridgeAbi,
                       signer
                     );
-                    setHomeBridge(bridge);
+                    setHomeBridge(bridgeContract as AstraBridge);
 
                     const wrapperToken = homeChainConfig.tokens.find(
                       (token) => token.isNativeWrappedToken
                     );
+                    console.log("wrapper", wrapperToken);
 
                     if (!wrapperToken) {
                       setWrapperConfig(undefined);
@@ -212,16 +219,17 @@ export const EVMHomeAdaptorProvider = ({
                 return;
               }
 
-              const bridge = BridgeFactory.connect(
+              const bridgeContract = new Contract(
                 (homeChainConfig as EvmBridgeConfig).bridgeAddress,
+                bridgeAbi,
                 signer
               );
-              setHomeBridge(bridge);
+              setHomeBridge(bridgeContract as AstraBridge);
 
               const wrapperToken = homeChainConfig.tokens.find(
                 (token) => token.isNativeWrappedToken
               );
-
+              console.log("wrapper", wrapperToken);
               if (!wrapperToken) {
                 setWrapperConfig(undefined);
                 setWrapper(undefined);
@@ -268,7 +276,7 @@ export const EVMHomeAdaptorProvider = ({
     };
     const getBridgeFee = async () => {
       if (homeBridge) {
-        const bridgeFee = Number(utils.formatEther(await homeBridge._fee()));
+        const bridgeFee = 0; //Number(utils.formatEther(await homeBridge._fee()));
         setBridgeFee(bridgeFee);
       }
     };
@@ -342,22 +350,7 @@ export const EVMHomeAdaptorProvider = ({
       setSelectedToken(tokenAddress);
       const erc20 = Erc20DetailedFactory.connect(tokenAddress, signer);
       const erc20Decimals = tokens[tokenAddress].decimals;
-
-      const data =
-        "0x" +
-        utils
-          .hexZeroPad(
-            // TODO Wire up dynamic token decimals
-            BigNumber.from(
-              utils.parseUnits(amount.toString(), erc20Decimals)
-            ).toHexString(),
-            32
-          )
-          .substr(2) + // Deposit Amount (32 bytes)
-        utils
-          .hexZeroPad(utils.hexlify((recipient.length - 2) / 2), 32)
-          .substr(2) + // len(recipientAddress) (32 bytes)
-        recipient.substr(2); // recipientAddress (?? bytes)
+      const signerAddress = await signer.getAddress();
 
       try {
         const gasPriceCompatibility = await getPriceCompatibility(
@@ -365,7 +358,6 @@ export const EVMHomeAdaptorProvider = ({
           homeChainConfig,
           gasPrice
         );
-
         const currentAllowance = await erc20.allowance(
           address,
           (homeChainConfig as EvmBridgeConfig).erc20HandlerAddress
@@ -405,31 +397,71 @@ export const EVMHomeAdaptorProvider = ({
             )
           ).wait(1);
         }
-        homeBridge.once(
-          homeBridge.filters.Deposit(
-            destinationChainId,
-            token.resourceId,
-            null
-          ),
-          (destChainId, resourceId, depositNonce) => {
-            setDepositNonce(`${depositNonce.toString()}`);
-            setTransactionStatus("In Transit");
-            analytics.trackTransferInTransitEvent({
-              address,
-              recipient,
-              nonce: parseInt(depositNonce),
-              amount: depositAmount as number,
-            });
-          }
+
+        const data =
+          token.resourceId + // Resource ID           (32 bytes)
+          utils
+            .hexZeroPad(utils.parseEther(String(amount)).toHexString(), 32)
+            .substring(2) + // Deposit Amount        (32 bytes)
+          recipient.substring(2) +
+          "000000000000000000000000"; // RecipientAddress      (32 bytes)
+
+        const adapterParams = utils.solidityPack(
+          ["uint16", "uint256"],
+          [1, 350000]
         );
 
-        await (
-          await homeBridge.deposit(destinationChainId, token.resourceId, data, {
-            gasPrice: gasPriceCompatibility,
-            value: utils.parseUnits((bridgeFee || 0).toString(), 18),
-          })
-        ).wait();
-
+        let sendFeeResp = await homeBridge.estimateSendFee(
+          destinationChainConfig?.lzNetworkId || 1,
+          data,
+          true,
+          adapterParams
+        );
+        const sendFee = sendFeeResp.nativeFee.add(sendFeeResp.zroFee);
+        console.log(`sendFee ${sendFee}`);
+        // TODO: current, it does not work
+        // homeBridge.once(
+        //   homeBridge.filters.SendToChain(
+        //     signerAddress,
+        //     token.resourceId,
+        //     data,
+        //     null
+        //   ),
+        //   (sender, _dstChainId, _data, nonce) => {
+        //     console.log(sender, _dstChainId, _data, nonce);
+        //     setDepositNonce(`${nonce.toString()}`);
+        //     setTransactionStatus("In Transit");
+        //     analytics.trackTransferInTransitEvent({
+        //       address,
+        //       recipient,
+        //       nonce: parseInt(nonce),
+        //       amount: depositAmount as number,
+        //     });
+        //   }
+        // );
+        const tx = await homeBridge.sendToChain(
+          signerAddress,
+          destinationChainConfig?.lzNetworkId || 1, // dist chain id,
+          token.resourceId, // resrouce id
+          data,
+          adapterParams,
+          {
+            value: sendFee,
+            gasPrice: undefined,
+            gasLimit: undefined,
+          }
+        );
+        console.log(tx);
+        await tx.wait();
+        setTransactionStatus("Transfer Completed");
+        fallback?.stop();
+        setTransferTxHash(tx.hash);
+        // analytics.trackTransferCompletedEvent({
+        //   address: address as string,
+        //   recipient: depositRecipient as string,
+        //   nonce: parseInt(depositNonce),
+        //   amount: depositAmount as number,
+        // });
         return Promise.resolve();
       } catch (error) {
         console.error(error);

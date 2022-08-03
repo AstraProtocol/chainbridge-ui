@@ -11,27 +11,35 @@ window.__RUNTIME_CONFIG__ = {
     chains: [
       {
         chainId: 0,
-        networkId: 97,
-        lzNetworkId: 10002,
-        name: "bsc-testnet",
+        networkId: 31337,
+        name: "Local host 1",
         decimals: 18,
-        bridgeAddress: "0x3E01dB71d5f19ec8C9f2227B47E3E84FA90C9486",
-        erc20HandlerAddress: "0x5e5543598CbCf7E06C2063AB529C2b4d10bEC06d",
-        rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+        bridgeAddress: "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+        erc20HandlerAddress: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+        rpcUrl: "http://localhost:8545",
         type: "Ethereum",
-        nativeTokenSymbol: "BNB",
+        nativeTokenSymbol: "ASTEA",
         defaultGasPrice: 800,
         gasPriceSuggestionEnabled: true,
         defaultGasPriceIncreaseInPercents: 20,
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee",
-            name: "BUSD",
-            symbol: "BUSD",
+            address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+            name: "MOCK",
+            symbol: "MOCK",
             imageUri: "WETHIcon",
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+          },
+          {
+            address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+            name: "WMOCK",
+            symbol: "WMOCK",
+            imageUri: "WETHIcon",
+            resourceId:
+              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+            isNativeWrappedToken: true,
           },
         ],
         transferFallback: [
@@ -46,27 +54,17 @@ window.__RUNTIME_CONFIG__ = {
       },
       {
         chainId: 1,
-        networkId: 43113,
-        lzNetworkId: 10006,
-        name: "Fuji",
+        networkId: 31338,
+        name: "Astra Testnet",
         decimals: 18,
-        bridgeAddress: "0x0c291584ffd0Dc4cACb334385eD342413B1213dE",
-        erc20HandlerAddress: "0xAa83Ade6a57DA1FEe0737237Ab9E23d76daf2B5f",
-        rpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
+        bridgeAddress: "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+        erc20HandlerAddress: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+        rpcUrl: "http://localhost:8545",
         type: "Ethereum",
-        nativeTokenSymbol: "AVA",
+        nativeTokenSymbol: "ASTRA",
         availableAsHomeNetwork: true,
         defaultGasPrice: 1000,
-        tokens: [
-          {
-            address: "0xe9675C144b3393fD2E2D50061c558e37EE9D8A18",
-            name: "asBUSD",
-            symbol: "asBUSD",
-            imageUri: "WETHIcon",
-            resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
-          },
-        ],
+        tokens: [],
         transferFallback: [
           {
             chainId: 1,
